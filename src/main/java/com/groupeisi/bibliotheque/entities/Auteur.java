@@ -8,6 +8,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@Data
 public class Auteur {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

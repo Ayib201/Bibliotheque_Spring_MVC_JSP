@@ -1,0 +1,38 @@
+package com.groupeisi.bibliotheque.mappers;
+
+import com.groupeisi.bibliotheque.dto.auteur.AuteurCreateDto;
+import com.groupeisi.bibliotheque.dto.auteur.AuteurDetailDto;
+import com.groupeisi.bibliotheque.dto.auteur.AuteurListDto;
+import com.groupeisi.bibliotheque.entities.Auteur;
+
+public class AuteurMapper
+        extends MapperImpl<Auteur, AuteurListDto, AuteurDetailDto, AuteurCreateDto> {
+
+    @Override
+    public AuteurListDto toListDto(Auteur entity) {
+        return AuteurListDto.builder()
+                .nom(entity.getNom())
+                .prenom(entity.getPrenom())
+                .nationalite(entity.getNationalite())
+                .build();
+    }
+
+    @Override
+    public AuteurDetailDto toDetailDto(Auteur entity) {
+        return AuteurDetailDto.builder()
+                .nom(entity.getNom())
+                .prenom(entity.getPrenom())
+                .nationalite(entity.getNationalite())
+                .livres(entity.getLivres())
+                .build();
+    }
+
+    @Override
+    public Auteur toEntity(AuteurCreateDto createDto) {
+        return Auteur.builder()
+                .nom(createDto.getNom())
+                .prenom(createDto.getPrenom())
+                .nationalite(createDto.getNationalite())
+                .build();
+    }
+}
