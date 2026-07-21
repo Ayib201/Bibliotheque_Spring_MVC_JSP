@@ -4,13 +4,16 @@ import com.groupeisi.bibliotheque.dto.auteur.AuteurCreateDto;
 import com.groupeisi.bibliotheque.dto.auteur.AuteurDetailDto;
 import com.groupeisi.bibliotheque.dto.auteur.AuteurListDto;
 import com.groupeisi.bibliotheque.entities.Auteur;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuteurMapper
         extends MapperImpl<Auteur, AuteurListDto, AuteurDetailDto, AuteurCreateDto> {
 
     @Override
     public AuteurListDto toListDto(Auteur entity) {
         return AuteurListDto.builder()
+                .id(entity.getId())
                 .nom(entity.getNom())
                 .prenom(entity.getPrenom())
                 .nationalite(entity.getNationalite())
@@ -20,6 +23,7 @@ public class AuteurMapper
     @Override
     public AuteurDetailDto toDetailDto(Auteur entity) {
         return AuteurDetailDto.builder()
+                .id(entity.getId())
                 .nom(entity.getNom())
                 .prenom(entity.getPrenom())
                 .nationalite(entity.getNationalite())

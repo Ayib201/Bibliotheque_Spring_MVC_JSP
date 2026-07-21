@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@org.springframework.stereotype.Repository
 @Transactional
 public class RepositoryImpl<T, I> implements Repository<T, I> {
 
