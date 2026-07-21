@@ -34,6 +34,7 @@ public class AuteurMapper
     @Override
     public Auteur toEntity(AuteurCreateDto createDto) {
         return Auteur.builder()
+                .id(createDto.getId())
                 .nom(createDto.getNom())
                 .prenom(createDto.getPrenom())
                 .nationalite(createDto.getNationalite())
