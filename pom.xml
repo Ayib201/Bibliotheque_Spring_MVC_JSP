@@ -96,6 +96,17 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
             </plugin>
+            <plugin>
+                <!-- Sans le flag -parameters, le bytecode compilé ne conserve pas les noms
+                     des paramètres de méthode : Spring ne peut alors pas déduire tout seul
+                     que le "id" de @PathVariable Long id correspond au "{id}" de l'URL,
+                     d'où l'IllegalArgumentException au runtime. -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
