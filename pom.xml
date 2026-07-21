@@ -31,6 +31,15 @@
             <artifactId>jakarta.servlet.jsp.jstl</artifactId>
             <version>3.0.1</version>
         </dependency>
+        <!-- Depuis la 3.0.1, org.glassfish.web:jakarta.servlet.jsp.jstl déclare cette API
+             en scope "provided" dans son propre pom, donc Maven ne la propage plus dans le WAR.
+             On la redéclare explicitement (scope compile par défaut) pour que jakarta.servlet.jsp.jstl.core.Config
+             et les autres classes de l'API JSTL se retrouvent bien dans WEB-INF/lib. -->
+        <dependency>
+            <groupId>jakarta.servlet.jsp.jstl</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>

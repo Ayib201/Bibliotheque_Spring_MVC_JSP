@@ -13,7 +13,7 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/auteurs")
 public class AuteurController extends com.groupeisi.bibliotheque.controllers.Controller {
-
+    private static final String REDIRECT_AUTEURS = "redirect:/auteurs";
     private final IAuteurService auteurService;
 
     @Autowired
@@ -31,7 +31,7 @@ public class AuteurController extends com.groupeisi.bibliotheque.controllers.Con
     public String get(@PathVariable Long id, Model model) {
         Optional<AuteurDetailDto> auteur = auteurService.get(id);
         if (auteur.isEmpty()) {
-            return "redirect:/list";
+            return REDIRECT_AUTEURS;
         }
         model.addAttribute("auteur", auteur.get());
         return "auteur/detail";
@@ -46,14 +46,14 @@ public class AuteurController extends com.groupeisi.bibliotheque.controllers.Con
     @PostMapping
     public String save(@ModelAttribute AuteurCreateDto createDto) {
         auteurService.save(createDto);
-        return "redirect:/auteurs";
+        return REDIRECT_AUTEURS;
     }
 
     @GetMapping("/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
         Optional<AuteurDetailDto> auteur = auteurService.get(id);
         if (auteur.isEmpty()) {
-            return "redirect:/auteurs";
+            return REDIRECT_AUTEURS;
         }
         model.addAttribute("auteur", auteur.get());
         return "auteur/edit";
@@ -62,12 +62,12 @@ public class AuteurController extends com.groupeisi.bibliotheque.controllers.Con
     @PostMapping("/update")
     public String update(@ModelAttribute AuteurCreateDto createDto) {
         auteurService.update(createDto);
-        return "redirect:/auteurs";
+        return REDIRECT_AUTEURS;
     }
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
         auteurService.delete(id);
-        return "redirect:/auteurs";
+        return REDIRECT_AUTEURS;
     }
 }
