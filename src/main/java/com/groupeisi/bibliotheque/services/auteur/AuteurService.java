@@ -6,8 +6,10 @@ import com.groupeisi.bibliotheque.dto.auteur.AuteurDetailDto;
 import com.groupeisi.bibliotheque.dto.auteur.AuteurListDto;
 import com.groupeisi.bibliotheque.entities.Auteur;
 import com.groupeisi.bibliotheque.mappers.AuteurMapper;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -59,12 +61,16 @@ public class AuteurService implements IAuteurService {
     }
 
     @Override
+    @Transactional
     public Optional<AuteurDetailDto> get(Long id) {
         if (id == null) {
             return Optional.empty();
         }
         Auteur auteur = auteurDao.get(id, Auteur.class);
-        return Optional.ofNullable(auteur)
-                .map(auteurMapper::toDetailDto);
+        if (auteur == null) {
+            return Optional.empty();
+        }
+        Hibernate.initialize(auteur.getLivres());
+        return Optional.of(auteurMapper.toDetailDto(auteur));
     }
 }
